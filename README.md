@@ -16,6 +16,25 @@ Instead of putting sensitive information publicly on-chain, ShadowStamp hashes c
 
 ---
 
+## Screenshots
+
+### Landing Page
+![Landing Page](./screenshots/landing-page.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Creating a Proof
+![Creating a Proof](./screenshots/created.png)
+
+### Verifying / Accepting a Proof
+![Verify Proof](./screenshots/accepting.png)
+
+### Content Hashing
+![Hashing](./screenshots/hashing.png)
+
+---
+
 ## Features
 
 - **Private proof creation** — content is hashed (SHA-256) and committed locally; only the commitment is submitted on-chain
