@@ -37,41 +37,58 @@ Instead of putting sensitive information publicly on-chain, ShadowStamp hashes c
 - **Wallet:** 1AM Wallet (`dapp-connector-api`)
 - **QR Codes:** `qrcode.react`
 - **Certificates:** HTML Canvas → PNG export
+- **Key packages:** `@midnight-ntwrk/compact-js`, `@midnight-ntwrk/compact-runtime`, `@midnight-ntwrk/midnight-js-contracts`, `@midnight-ntwrk/ledger-v8`
 
 ---
 
 ## Architecture
 
+```
 Content (text/file)
-↓
+      │
+      ▼
 Local SHA-256 hash + commitment (browser only — nothing leaves device)
-↓
-Compact smart contract (submitProof) — deployed on Midnight Preview
-↓
+      │
+      ▼
+Compact smart contract (submitProof) ── deployed on Midnight Preview
+      │
+      ▼
 On-chain: commitmentByHash map stores {hash, commitment, timestamp}
-↓
+      │
+      ▼
 Anyone can call verifyProof(hash) to confirm existence — without ever
 seeing the original content.
+```
 
+The Compact contract (`contracts/shadowstamp/proof.compact`) exposes:
+- `submitProof(hash, commitment)` — records a proof on-chain
+- `verifyProof(hash)` — checks whether a proof exists for a given hash
 
 ---
 
 ## Getting Started
 
 ```bash
+# Install dependencies
 npm install
+
+# Set network config
 echo "VITE_1AM_NETWORK=preview" > .env
+
+# Compile the Compact contract
 npm run compact
+
+# Run the app
 npm run dev
 ```
 
-Then connect **1AM Wallet** (Preview network, testnet funded) and click **Stamp proof**.
+Then open the app, click **Connect 1AM Wallet**, make sure your wallet is on the **Preview** network with testnet funds (via faucet), and click **Stamp proof** to create your first private proof.
 
 ---
 
 ## Engineering Notes
 
-Getting a real Compact contract talking to a browser wallet involved resolving deep dependency-version conflicts inside Midnight's own SDK — duplicate WASM runtime instances caused `instanceof` identity mismatches (`_StateValue`) at the contract-submission boundary. Resolved by unifying package versions via `overrides` and Vite's `resolve.dedupe`.
+Getting a real Compact contract talking to a browser wallet involved resolving several deep dependency-version conflicts inside Midnight's own SDK — notably duplicate WASM runtime instances (`onchain-runtime-v3` resolving to two different versions across `midnight-js-protocol` and `compact-runtime`), which caused `instanceof` identity mismatches between WASM-bound classes (`_StateValue`) at the contract-submission boundary. This was resolved by unifying package versions via `overrides` and Vite's `resolve.dedupe`, ensuring a single WASM runtime instance is loaded across the entire dependency graph.
 
 ---
 
@@ -91,4 +108,4 @@ Getting a real Compact contract talking to a browser wallet involved resolving d
 
 ## Privacy Guarantee
 
-At no point does the original content, file, or plaintext leave the user's device. Only a cryptographic hash and commitment are ever transmitted or stored on-chain.
+At no point does the original content, file, or plaintext leave the user's device. Only a cryptographic hash and commitment are ever transmitted or stored on-chain — demonstrating how Midnight's privacy-preserving blockchain can enable real-world intellectual property protection and digital trust without sacrificing confidentiality.
