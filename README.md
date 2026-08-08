@@ -33,6 +33,9 @@ Instead of putting sensitive information publicly on-chain, ShadowStamp hashes c
 ### Content Hashing
 ![Hashing](./screenshots/hashing.png)
 
+### [deployment contract]
+![Deploy](./screenshots/contract-deploy.png)
+
 ---
 
 ## Features
