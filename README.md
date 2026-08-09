@@ -57,6 +57,7 @@ Instead of putting sensitive information publicly on-chain, ShadowStamp hashes c
 
 ---
 
+
 ## Tech Stack
 
 - **Frontend:** React + TypeScript + Vite
@@ -148,3 +149,9 @@ ShadowStamp proves the existence and ownership of digital content without reveal
 4. Anyone can call `verifyProof(hash)` to confirm a proof exists for a given hash, without the contract or chain ever having access to the original content.
 
 This demonstrates Midnight's core privacy guarantee: **proof without disclosure** — ownership and existence are verifiable on a public ledger while the sensitive content itself remains permanently private and off-chain.
+
+---
+## Note on Wallet & Network
+This submission uses 1AM Wallet on Midnight's Preview testnet (a fully functional wallet integration and live deployment). Migration to Lace/Preprod was time-constrained for this submission cycle.
+
+---
