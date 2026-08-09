@@ -38,6 +38,12 @@ Instead of putting sensitive information publicly on-chain, ShadowStamp hashes c
 
 ---
 
+## Live Demo
+- **App:** https://shadowstamp-ten.vercel.app/
+- **Demo Video:** https://drive.google.com/file/d/1xe0m_N5jSsKapaeuqrTOUP2XW3Rtbwv6/view?usp=sharing
+
+---
+
 ## Features
 
 - **Private proof creation** — content is hashed (SHA-256) and committed locally; only the commitment is submitted on-chain
