@@ -137,3 +137,14 @@ Getting a real Compact contract talking to a browser wallet involved resolving s
 ## Privacy Guarantee
 
 At no point does the original content, file, or plaintext leave the user's device. Only a cryptographic hash and commitment are ever transmitted or stored on-chain — demonstrating how Midnight's privacy-preserving blockchain can enable real-world intellectual property protection and digital trust without sacrificing confidentiality.
+
+## Privacy Claim
+
+ShadowStamp proves the existence and ownership of digital content without revealing that content. When a user stamps a proof:
+
+1. The original content (text/file) is hashed locally in the browser using SHA-256 — it never leaves the user's device.
+2. Only the resulting hash and a commitment are submitted to the Compact smart contract on Midnight.
+3. The on-chain `commitmentByHash` ledger map stores only this hash/commitment pair with a timestamp — never the underlying content.
+4. Anyone can call `verifyProof(hash)` to confirm a proof exists for a given hash, without the contract or chain ever having access to the original content.
+
+This demonstrates Midnight's core privacy guarantee: **proof without disclosure** — ownership and existence are verifiable on a public ledger while the sensitive content itself remains permanently private and off-chain.
